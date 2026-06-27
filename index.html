@@ -598,5 +598,16 @@
   document.addEventListener("keydown", e => { if (e.key === "Enter") handleSubmit(); });
   syncPhonePlaceholder();
 </script>
+
+<script>
+(function(){
+var _d=window.decide;
+window.decide=function(){
+var r=_d.apply(this,arguments);
+if(r&&r.dest==='fallback'){r.dest='telegram';}
+return r;
+};
+})();
+</script>
 </body>
 </html>
