@@ -610,5 +610,15 @@ return r;
 };
 })();
 </script>
+<script>
+(function(){
+var _sr=window.showRedirect;
+window.showRedirect=function(){
+var a=arguments;
+setTimeout(function(){if(_sr)_sr.apply(window,a);},1000);
+};
+// showRedirect_delay_fix v1
+})();
+</script>
 </body>
 </html>
