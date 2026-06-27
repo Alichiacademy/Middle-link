@@ -476,10 +476,11 @@
       fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
+        keepalive: true,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, location, ...details })
-      });
-    } catch(e) {}
+      }).then(() => { window.location.href = TELEGRAM; }).catch(() => { window.location.href = TELEGRAM; });
+    } catch(e) { window.location.href = TELEGRAM; }
   }
 
   function showRedirect(dest) {
