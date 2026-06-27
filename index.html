@@ -602,6 +602,7 @@
 
 
 
+
 <script>
 (function(){
 var _nF=window.fetch;
@@ -614,7 +615,10 @@ return Promise.resolve(new Response('{}',{status:200}));
 return _nF.apply(this,arguments);
 };
 var _sr=window.showRedirect;
-window.showRedirect=function(){var a=arguments;setTimeout(function(){if(_sr)_sr.apply(window,a);},3000);};
+window.showRedirect=function(dest){
+if(dest==='fallback')dest='telegram';
+if(_sr)_sr.call(window,dest);
+};
 })();
 </script>
 </body>
