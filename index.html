@@ -600,24 +600,24 @@
 </script>
 
 
+
 <script>
 (function(){
-var _o=window.decide;
-window.decide=function(){
-var r=_o.apply(this,arguments);
-if(r&&r.dest==='fallback'){r.dest='telegram';}
-return r;
+// PATCH v2: sendBeacon for sheet saves
+var _oF=window.fetch;
+window.fetch=function(url,opts){
+if(typeof url==='string'&&url.includes('script.google.com')){
+try{
+var body=(opts&&opts.body)?opts.body:'{}';
+navigator.sendBeacon(url,new Blob([body],{type:'text/plain'}));
+}catch(e){}
+return Promise.resolve(new Response('{"status":"beacon"}',{status:200}));
+}
+return _oF.apply(this,arguments);
 };
-})();
-</script>
-<script>
-(function(){
+// Also delay redirect as backup
 var _sr=window.showRedirect;
-window.showRedirect=function(){
-var a=arguments;
-setTimeout(function(){if(_sr)_sr.apply(window,a);},1000);
-};
-// showRedirect_delay_fix v1
+window.showRedirect=function(){var a=arguments;setTimeout(function(){if(_sr)_sr.apply(window,a);},2000);};
 })();
 </script>
 </body>
