@@ -603,21 +603,12 @@
 
 
 
+
 <script>
 (function(){
-var _nF=window.fetch;
-window.fetch=function(url,opts){
-if(typeof url==='string'&&url.includes('script.google.com')){
-var o=Object.assign({},opts||{},{keepalive:true,mode:'no-cors'});
-_nF.call(window,url,o);
-return Promise.resolve(new Response('{}',{status:200}));
-}
-return _nF.apply(this,arguments);
-};
 var _sr=window.showRedirect;
 window.showRedirect=function(dest){
-if(dest==='fallback')dest='telegram';
-if(_sr)_sr.call(window,dest);
+setTimeout(function(){if(_sr)_sr.call(window,dest);},3000);
 };
 })();
 </script>
